@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .calculator h2 {
+            margin-bottom: 20px;
+        }
+
+        .calculator input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .calculator button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .calculator button:hover {
+            background-color: #218838;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+        <h2>Calculadora de IMC</h2>
+        <input type="number" id="weight" placeholder="Peso (kg)" step="0.1">
+        <input type="number" id="height" placeholder="Altura (m)" step="0.01">
+        <button onclick="calculateBMI()">Calcular IMC</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+
+            if (isNaN(weight) || isNaN(height) || height <= 0) {
+                document.getElementById('result').innerText = 'Por favor, insira valores válidos.';
+                return;
+            }
+
+            const bmi = (weight / (height * height)).toFixed(2);
+
+            let category = '';
+            if (bmi < 18.5) {
+                category = 'Abaixo do peso';
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                category = 'Peso normal';
+            } else if (bmi >= 25 && bmi < 29.9) {
+                category = 'Sobrepeso';
+            } else {
+                category = 'Obesidade';
+            }
+
+            document.getElementById('result').innerText = `Seu IMC é ${bmi} (${category})`;
+        }
+    </script>
+
+</body>
+
+</html>
